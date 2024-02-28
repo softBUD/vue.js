@@ -1,0 +1,33 @@
+<div id="data">
+  <p v-if="login">로그인 되었습니다</p>
+  <p v-else>로그인 하세요.</p>
+  <!-- 로그인 값 조건에 따라 렌더링됨, 조건에 맞지않으면 아예 렌더링 X-->
+  <button v-on:click="loginAct" v-if="login">로그아웃</button>
+  <button v-on:click="loginAct" v-else>로그인</button>
+
+  <hr />
+  <!-- v-show는 위 방식과는 다르게 스타일속성에 display:none이 적용된다 -->
+  <p v-show="loginShow">로그인 되었습니다</p>
+  <button v-on:click="loginShowAct" v-else>로그인</button>
+
+  <p></p>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        login: false,
+        loginShow: false
+      }
+    },
+    methods: {
+      loginAct() {
+        this.login = !this.login
+      },
+      loginShowAct() {
+        this.loginShow = !this.loginShow
+      }
+    }
+  }).mount('#data')
+</script>

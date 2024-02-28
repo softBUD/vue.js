@@ -1,0 +1,15 @@
+<div id="vueApp">
+  <ul>
+    <li v-for="item in items">{{item}}</li>
+  </ul>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        items: ['네이버', '카카오', '인프런']
+      }
+    }
+  }).mount('#vueApp')
+</script>

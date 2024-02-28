@@ -1,0 +1,25 @@
+<!-- 인스턴스의 속성, API들 참고문서 -->
+<!-- https://joshua1988.github.io/vue-camp/vue/instance.html#%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%E1%85%B3%E1%84%90%E1%85%A5%E1%86%AB%E1%84%89%E1%85%B3-%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC -->
+<div id="app">
+  <p>{{count}}</p>
+  <!-- 버튼에 클릭이벤트 설정 -->
+  <button v-on:click="addCount">+</button>
+</div>
+<!-- VUE3 를 예시로 듦-->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  Vue.createApp({
+    // 속성에 함수를 연결함
+    // data(){} 로 줄일 수 있음
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    methods: {
+      addCount() {
+        this.count++
+      }
+    }
+  }).mount('#app')
+</script>

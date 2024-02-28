@@ -1,0 +1,43 @@
+<div id="same-components">
+  <!-- contents-header에서 event emit을 통해 실행된 이벤트 함수 receive -->
+  <!-- receive 이벤트가 실행되면서 this.message 즉 루트 컴포넌트의 message 라는 값에 값이 할당되었다. -->
+  <!-- 최종적으로 v-bind를 통해 app header의 props에 값이 전달되었다. -->
+  <app-header v-bind:app-title="message"></app-header>
+  <contents-header v-on:login="receive"></contents-header>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  let appHeader = {
+    // root 컴포넌트로부터 값을 전달받을 props 정의
+    //html에서 뷰 파일을 구현할때 root 컴포넌트 내부의 하이픈으로 연결된 이름은 카멜케이스로 작성해야함.
+    props: ['appTitle'],
+    template: `<h1>{{appTitle}}</h1>`
+  }
+  let contentsHeader = {
+    template: `<p>
+        <button v-on:click="sendEvent">로그인</button>
+        </p>`,
+    methods: {
+      sendEvent() {
+        this.$emit('login')
+      }
+    }
+  }
+  Vue.createApp({
+    data() {
+      return {
+        message: ''
+      }
+    },
+    methods: {
+      receive() {
+        console.log('받았음')
+        this.message = '로그인됨'
+      }
+    },
+    components: {
+      'app-header': appHeader,
+      'contents-header': contentsHeader
+    }
+  }).mount('#same-components')
+</script>

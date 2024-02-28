@@ -1,0 +1,27 @@
+<div id="app">
+  <app-contents v-on:refresh="showAlert"></app-contents>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  // 하위컴포넌트와 이벤트를 정의
+  var appContents = {
+    template: `<p><button v-on:click="sendEvent">갱신</button></p>`,
+    methods: {
+      sendEvent() {
+        // 이벤트를 상위컴포넌트로 전이하는 문법
+        this.$emit('refresh')
+      }
+    }
+  }
+  //   루트 컴포넌트
+  Vue.createApp({
+    methods: {
+      showAlert() {
+        window.alert('새로고침')
+      }
+    },
+    components: {
+      'app-contents': appContents
+    }
+  }).mount('#app')
+</script>

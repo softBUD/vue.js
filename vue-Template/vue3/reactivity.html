@@ -1,0 +1,35 @@
+<div id="app"></div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  const data = {
+    message: 10
+  }
+
+  function render(sth) {
+    const div = document.querySelector('#app')
+
+    div.innerHTML = sth
+  }
+
+  //   프록시에 대해서 알아보면 좋음.
+  // 프록시는 어떤 객체의 값의 동작을 변경할 수 있다.
+  //   const app = new Proxy(data, {
+  //     get() {
+  //       console.log('값 접근')
+  //     },
+  //     set() {
+  //       console.log('값 갱신')
+  //     }
+  //   })
+
+  const app = new Proxy(data, {
+    get() {
+      console.log('상태값 접근')
+    },
+    set(target, prop, value) {
+      console.log('상태값 갱신')
+      target[prop] = value
+      render(value)
+    }
+  })
+</script>
